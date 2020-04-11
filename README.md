@@ -1,16 +1,18 @@
-# flutter2
+# VisiMood
 
-A new Flutter application.
+A Flutter application that allows users to log in how they feel during the day to visualize their moods.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Adding a mood
+    -Users are welcomed by a calendar that displays todays date.
+    -Sliders are then presented with corresponding moods such as happy, sad, angry, or anxious.
+    -Each slider has a range of 0 - 10, which displays the strength of the mood. 0 being the lowest and 10 being the highest.
+    -Once each mood has been adjusted, the user can log the data back to the calendar.
 
-A few resources to get you started if this is your first Flutter project:
+- Displaying moods
+    -The different moods also have corresponding colors to them. The mood with the highest strength for the day will be
+        displayed on a calendar along with its color.
+    -These colors will also be added to a display that shows all logs throughout the year.
+    -Daily line graphs will also be shown, allowing the user to observe trends in their moods.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
