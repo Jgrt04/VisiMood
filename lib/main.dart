@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+import './calendar.dart';
+import './addMood.dart';
+import './trends.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VisiMood',
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: MyHomePage(title: 'VisiMood Home Page'),
     );
   }
@@ -27,7 +28,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  CalendarController _controller;
+
+  final _pageOptions = [CalendarPage(), AddMood(), Trends()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -36,35 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controller = CalendarController();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('VisiMood'),
       ),
-      body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TableCalendar(
-                calendarStyle: CalendarStyle(
-                    todayColor: Colors.amber[800],
-                    selectedColor: Colors.purpleAccent,
-                    todayStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white,
-                    )),
-                calendarController: _controller,
-              )
-            ],
-          )),
+      body: _pageOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
