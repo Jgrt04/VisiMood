@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/yourYear.dart';
 
 import './calendar.dart';
 import './addMood.dart';
@@ -29,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  final _pageOptions = [CalendarPage(), AddMood(), Trends()];
+  final _pageOptions = [CalendarPage(), AddMood(), Trends(), YourYear()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -45,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: _pageOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
@@ -58,11 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.timeline),
             title: Text('Trends'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            title: Text('Your Year'),
+            activeIcon: Icon(Icons.cake)
+          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white70,
         onTap: _onItemTapped,
+        elevation: 0.0,
       ),
     );
   }
