@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,15 +19,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -35,30 +27,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 50, fontWeight: FontWeight.normal);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Calendar',
-      style: optionStyle,
-    ),
-    Text(
-      'Add Mood',
-      style: optionStyle,
-    ),
-    Text(
-      'Trends',
-      style: optionStyle,
-    ),
-  ];
+  CalendarController _controller;
 
-  int count = 0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      count++;
     });
-    //print("button clicked $count times");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = CalendarController();
   }
 
   @override
@@ -67,9 +48,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('VisiMood'),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TableCalendar(
+                calendarStyle: CalendarStyle(
+                    todayColor: Colors.amber[800],
+                    selectedColor: Colors.purpleAccent,
+                    todayStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    )),
+                calendarController: _controller,
+              )
+            ],
+          )),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -87,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
+        backgroundColor: Colors.white,
         onTap: _onItemTapped,
       ),
     );
