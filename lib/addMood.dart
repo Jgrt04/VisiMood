@@ -1,5 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+class CustomPicker extends CommonPickerModel {
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
+
+  CustomPicker({DateTime currentTime, LocaleType locale})
+      : super(locale: locale) {
+    this.currentTime = currentTime ?? DateTime.now();
+    this.setLeftIndex(this.currentTime.hour);
+    this.setMiddleIndex(this.currentTime.minute);
+    this.setRightIndex(this.currentTime.second);
+  }
+
+  @override
+  DateTime finalTime() {
+    return currentTime.isUtc
+        ? DateTime.utc(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex())
+        : DateTime(
+            currentTime.year,
+            currentTime.month,
+            currentTime.day,
+            this.currentLeftIndex(),
+            this.currentMiddleIndex(),
+            this.currentRightIndex());
+  }
+}
 
 class AddMood extends StatefulWidget {
   @override
@@ -19,6 +53,43 @@ class AddMoodState extends State<AddMood> {
     return new Scaffold(
       body: Column(
         children: <Widget>[
+          Center(
+            child: Column(
+              children: <Widget>[
+                RaisedButton(
+                    onPressed: () {
+                      DatePicker.showDatePicker(context,
+                          showTitleActions: true,
+                          minTime: DateTime(2018, 3, 5),
+                          maxTime: DateTime(2020, 12, 7),
+                          theme: DatePickerTheme(
+                              headerColor: Colors.white,
+                              backgroundColor: Colors.white,
+                              itemStyle: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                              doneStyle:
+                                  TextStyle(color: Colors.black, fontSize: 16)),
+                          onChanged: (date) {
+                            print('change $date in time zone ' +
+                            date.timeZoneOffset.inHours.toString());
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                      },
+                          currentTime: DateTime.now(),
+                          locale:
+                          LocaleType.en);
+                    },
+                    color: Colors.black12,
+                    elevation: 0.0,
+                    child: Text(
+                      'Select a Date',
+                      style: TextStyle(color: Colors.purpleAccent),
+                    )),
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
@@ -29,6 +100,7 @@ class AddMoodState extends State<AddMood> {
             value: _happyRating,
             onChanged: (newRating) {
               setState(() => _happyRating = newRating);
+              print(_happyRating);
             },
             activeColor: Colors.amberAccent,
             min: 0,
@@ -104,7 +176,6 @@ class AddMoodState extends State<AddMood> {
             divisions: 5,
             label: _stressRating.toInt().toString(),
           ),
-
         ],
       ),
     );

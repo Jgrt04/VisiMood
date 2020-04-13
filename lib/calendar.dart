@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import './addMood.dart';
 
-class CalendarPage extends StatefulWidget {
+class CalendarPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => CalendarState();
 }
 
 class CalendarState extends State<CalendarPage> {
   CalendarController _controller;
+
+  AddMood add = new AddMood();
 
   @override
   void initState() {
@@ -26,7 +29,7 @@ class CalendarState extends State<CalendarPage> {
               TableCalendar(
                 calendarStyle: CalendarStyle(
                     todayColor: Colors.amber[800],
-                    selectedColor: Colors.purpleAccent,
+                    selectedColor: Colors.amber,
                     todayStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
