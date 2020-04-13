@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VisiMood',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(primarySwatch: Colors.purple),
       home: MyHomePage(title: 'VisiMood Home Page'),
     );
   }
@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('VisiMood'),
+        elevation: 0.0,
       ),
       body: _pageOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

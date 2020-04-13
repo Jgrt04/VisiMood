@@ -6,7 +6,7 @@ class CalendarPage extends StatefulWidget {
   State<StatefulWidget> createState() => CalendarState();
 }
 
-class CalendarState extends State<StatefulWidget> {
+class CalendarState extends State<CalendarPage> {
   CalendarController _controller;
 
   @override
