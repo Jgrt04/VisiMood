@@ -20,7 +20,7 @@ class AddMoodState extends State<AddMood> {
       body: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(9.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               'Happy',
             ),
