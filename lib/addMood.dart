@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter2/calendar.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CustomPicker extends CommonPickerModel {
@@ -24,14 +25,16 @@ class CustomPicker extends CommonPickerModel {
             currentTime.day,
             this.currentLeftIndex(),
             this.currentMiddleIndex(),
-            this.currentRightIndex())
+            this.currentRightIndex()
+          )
         : DateTime(
             currentTime.year,
             currentTime.month,
             currentTime.day,
             this.currentLeftIndex(),
             this.currentMiddleIndex(),
-            this.currentRightIndex());
+            this.currentRightIndex()
+          );
   }
 }
 
@@ -46,6 +49,7 @@ class AddMoodState extends State<AddMood> {
   double _angryRating = 0.0;
   double _stressRating = 0.0;
   double _anxiousRating = 0.0;
+  DateTime datePicked = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +76,13 @@ class AddMoodState extends State<AddMood> {
                               doneStyle:
                                   TextStyle(color: Colors.black, fontSize: 16)),
                           onChanged: (date) {
-                            print('change $date in time zone ' +
+                        print('change $date in time zone ' +
                             date.timeZoneOffset.inHours.toString());
                       }, onConfirm: (date) {
                         print('confirm $date');
-                      },
-                          currentTime: DateTime.now(),
-                          locale:
-                          LocaleType.en);
+                        datePicked = date;
+                        setState(() => datePicked = date);
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
                     },
                     color: Colors.black12,
                     elevation: 0.0,
@@ -168,13 +171,26 @@ class AddMoodState extends State<AddMood> {
           new Slider(
             value: _stressRating,
             onChanged: (newRating) {
-              setState(() => _stressRating = newRating);
+             setState(() => _stressRating = newRating);
             },
             activeColor: Colors.orange,
             min: 0,
             max: 5,
             divisions: 5,
             label: _stressRating.toInt().toString(),
+          ),
+          Row(
+            children: <Widget>[
+              new Text("Date picked = $datePicked"),
+              RaisedButton(
+                child: Text("Add Mood"),
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CalendarPage(datePicked : datePicked),
+                  ));
+                },
+              ),
+            ],
           ),
         ],
       ),

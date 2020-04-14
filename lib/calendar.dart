@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import './addMood.dart';
+//import './addMood.dart';
 
 class CalendarPage extends StatefulWidget{
+
+  DateTime datePicked;
+  CalendarPage({Key key, @required this.datePicked}) : super(key : key);
+
   @override
-  State<StatefulWidget> createState() => CalendarState();
+  CalendarState createState() => CalendarState(datePicked);
 }
 
 class CalendarState extends State<CalendarPage> {
   CalendarController _controller;
-
-  AddMood add = new AddMood();
+  DateTime datePicked;
+  CalendarState(this.datePicked);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = CalendarController();
+    _controller = CalendarController(
+    );
   }
 
   @override
@@ -36,7 +41,9 @@ class CalendarState extends State<CalendarPage> {
                       color: Colors.white,
                     )),
                 calendarController: _controller,
-              )
+              ),
+//              Text(this.datePicked.toString(),
+//              ),
             ],
           )),
     );
