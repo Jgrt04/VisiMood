@@ -82,7 +82,13 @@ class CalendarState extends State<CalendarPage> {
               },
             ),
             ..._selectedEvents.map((event) => ListTile(
-                  title: Text(event),
+                  title: Text(
+                    event,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                    ),
+                  ),
                 )),
           ],
         ),
