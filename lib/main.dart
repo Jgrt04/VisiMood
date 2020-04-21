@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/yourYear.dart';
 
 import './calendar.dart';
-import './addMood.dart';
 import './trends.dart';
 
 void main() => runApp(MyApp());
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'VisiMood',
       theme: ThemeData(primarySwatch: Colors.purple),
       home: MyHomePage(title: 'VisiMood Home Page'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  final _pageOptions = [CalendarPage(), AddMood(), Trends(), YourYear()];
+  final _pageOptions = [CalendarPage(), Trends(), YourYear()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,10 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
             title: Text('Calendar'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            title: Text('Add Mood'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.timeline),
