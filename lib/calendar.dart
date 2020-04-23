@@ -120,34 +120,37 @@ class CalendarState extends State<CalendarPage> {
       MaterialPageRoute(builder: (context) => AddMood()),
     );
 
-    Scaffold.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text("Happiness: $result")));
-
     print("event Added");
 
-    if (!result) return;
-    setState(() {
-
-      if (_events[_controller.selectedDay] != null) {
-        _events[_controller.selectedDay].add("$result");
-
-      } else {
-        _events[_controller.selectedDay] = ["$result"];
-      }
-      prefs.setString("events", json.encode(encodeMap(_events)));
-      _eventController.clear();
-      //Navigator.pop(context);
-    });
-  }
+    if (result == null) {
+      return;
+    } else {
+      setState(() {
+        if (_events[_controller.selectedDay] != null) {
+          Scaffold.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Mood added")));
+          _events[_controller.selectedDay].add("$result");
+        } else {
+          Scaffold.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Mood added")));
+          _events[_controller.selectedDay] = ["$result"];
+        }
+        prefs.setString("events", json.encode(encodeMap(_events)));
+        _eventController.clear();
+        //Navigator.pop(context);
+      });
+    }
+    }
 }
 
 class AddMood extends StatefulWidget {
-  double happyRating;
-  double sadRating;
-  double angryRating;
-  double stressRating;
-  double anxiousRating;
+  final double happyRating;
+  final double sadRating;
+  final double angryRating;
+  final double stressRating;
+  final double anxiousRating;
 
   AddMood(
       {this.happyRating,
@@ -166,6 +169,8 @@ class AddMoodState extends State<AddMood> {
   double _angryRating = 0.0;
   double _stressRating = 0.0;
   double _anxiousRating = 0.0;
+
+
 
   AddMoodState(
       {happyRating, sadRating, angryRating, stressRating, anxiousRating});
@@ -272,8 +277,23 @@ class AddMoodState extends State<AddMood> {
 //                  MaterialPageRoute(builder: (context) => CalendarPage(
 //                    addmood: moods,
 //                  )));
+              List<double> moodList = [_happyRating, _sadRating, _angryRating, _anxiousRating, _stressRating];
+              moodList.sort();
 
-              Navigator.pop(context, _happyRating);
+              if(moodList[4] == _happyRating){
+                Navigator.pop(context, "Happy: $_happyRating");
+              } else if(moodList[4] == _sadRating){
+                Navigator.pop(context, "Sad: $_sadRating");
+              }else if(moodList[4] == _angryRating){
+                Navigator.pop(context, "Anger: $_angryRating");
+              }else if(moodList[4] == _anxiousRating){
+                Navigator.pop(context, "Anxious: $_anxiousRating");
+              }else {
+                Navigator.pop(context, "Stress: $_sadRating");
+              }
+
+
+
             },
           ),
         ],

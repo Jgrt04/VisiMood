@@ -83,6 +83,32 @@ class DrawCircle extends CustomPainter{
     canvas.drawCircle(Offset(135, 70), 8.0, _paint);
     canvas.drawCircle(Offset(165, 70), 8.0, _paint);
 
+    canvas.drawCircle(Offset(-165, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(-135, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(-105, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(-75, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(-45, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(-15, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(15, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(45, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(75, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(105, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(135, 90), 8.0, _paint);
+    canvas.drawCircle(Offset(165, 90), 8.0, _paint);
+
+    canvas.drawCircle(Offset(-165, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(-135, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(-105, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(-75, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(-45, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(-15, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(15, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(45, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(75, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(105, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(135, 110), 8.0, _paint);
+    canvas.drawCircle(Offset(165, 110), 8.0, _paint);
+
   }
 
   @override

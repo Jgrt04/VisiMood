@@ -19,6 +19,16 @@ class Trends extends StatelessWidget{
     ),
     MoodSeries(
       time: "21",
+      rating: 2,
+      chartColor: charts.ColorUtil.fromDartColor(Colors.red),
+    ),
+    MoodSeries(
+      time: "22",
+      rating: 4,
+      chartColor: charts.ColorUtil.fromDartColor(Colors.purple),
+    ),
+    MoodSeries(
+      time: "23",
       rating: 5,
       chartColor: charts.ColorUtil.fromDartColor(Colors.amber),
     ),
