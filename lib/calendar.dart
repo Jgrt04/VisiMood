@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter2/trends.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +22,7 @@ class CalendarState extends State<CalendarPage> {
   AddMood addmood;
   Map<DateTime, List<dynamic>> _events;
   List<dynamic> _selectedEvents;
-  TextEditingController _eventController;
+  //TextEditingController _eventController;
   SharedPreferences prefs;
 
 //  CalendarState(this.datePicked);
@@ -31,7 +32,7 @@ class CalendarState extends State<CalendarPage> {
   void initState() {
     super.initState();
     _controller = CalendarController();
-    _eventController = TextEditingController();
+    //_eventController = TextEditingController();
     _events = {};
     _selectedEvents = [];
     initPrefs();
@@ -72,7 +73,7 @@ class CalendarState extends State<CalendarPage> {
               events: _events,
               calendarStyle: CalendarStyle(
                   todayColor: Colors.black12,
-                  selectedColor: Colors.amber,
+                  selectedColor: Colors.amber[700],
                   todayStyle: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 18,
@@ -120,6 +121,13 @@ class CalendarState extends State<CalendarPage> {
       MaterialPageRoute(builder: (context) => AddMood()),
     );
 
+    //result is the highest mood and strength
+
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(builder: (context) => Trends()),
+//    );
+
     print("event Added");
 
     if (result == null) {
@@ -131,14 +139,16 @@ class CalendarState extends State<CalendarPage> {
             ..removeCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text("Mood added")));
           _events[_controller.selectedDay].add("$result");
+          print("1 ${_events[_controller.selectedDay]}");
         } else {
           Scaffold.of(context)
             ..removeCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text("Mood added")));
           _events[_controller.selectedDay] = ["$result"];
+          print("2 ${_events[_controller.selectedDay]}");
         }
         prefs.setString("events", json.encode(encodeMap(_events)));
-        _eventController.clear();
+        //_eventController.clear();
         //Navigator.pop(context);
       });
     }
@@ -169,8 +179,6 @@ class AddMoodState extends State<AddMood> {
   double _angryRating = 0.0;
   double _stressRating = 0.0;
   double _anxiousRating = 0.0;
-
-
 
   AddMoodState(
       {happyRating, sadRating, angryRating, stressRating, anxiousRating});
@@ -280,20 +288,21 @@ class AddMoodState extends State<AddMood> {
               List<double> moodList = [_happyRating, _sadRating, _angryRating, _anxiousRating, _stressRating];
               moodList.sort();
 
+              print(moodList.toString());
+
               if(moodList[4] == _happyRating){
+                print("before pop");
                 Navigator.pop(context, "Happy: $_happyRating");
+                print("after pop");
               } else if(moodList[4] == _sadRating){
                 Navigator.pop(context, "Sad: $_sadRating");
               }else if(moodList[4] == _angryRating){
                 Navigator.pop(context, "Anger: $_angryRating");
               }else if(moodList[4] == _anxiousRating){
                 Navigator.pop(context, "Anxious: $_anxiousRating");
-              }else {
-                Navigator.pop(context, "Stress: $_sadRating");
+              }else if(moodList[4] == _stressRating){
+                Navigator.pop(context, "Stress: $_stressRating");
               }
-
-
-
             },
           ),
         ],

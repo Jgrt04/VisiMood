@@ -27,7 +27,7 @@ class MoodChart extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                "Week of April 19, 2020",
+                "April 2020",
                 style: Theme
                     .of(context)
                     .textTheme
