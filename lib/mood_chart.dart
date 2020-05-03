@@ -18,29 +18,71 @@ class MoodChart extends StatelessWidget {
           colorFn: (MoodSeries series, _) => series.chartColor)
     ];
 
-    return Container(
-      height: 400,
-      padding: EdgeInsets.all(10),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(50),
-          child: Column(
-            children: <Widget>[
-              Text(
-                "April 2020",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .body2,
-              ),
-              Expanded(
-                  child: charts.BarChart(series, animate: true,)
-              )
-            ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: viewportConstraints.maxHeight,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  height: 500,
+                  padding: EdgeInsets.all(10),
+                  child: Card(
+                    elevation: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.all(50),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "May 2020",
+                            style: Theme.of(context).textTheme.body2,
+                          ),
+                          Expanded(
+                              child: charts.BarChart(
+                            series,
+                            animate: true,
+                            behaviors: [
+                              new charts.SlidingViewport(),
+                              new charts.PanAndZoomBehavior(),
+                            ],
+                            domainAxis: new charts.OrdinalAxisSpec(
+                                viewport: new charts.OrdinalViewport('5', 5)),
+                          ))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 400,
+                  padding: EdgeInsets.all(10),
+                  child: Card(
+                    elevation: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.all(140),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                              child: Text(
+                            "Another Graph Here",
+                            style: Theme.of(context).textTheme.body2,
+                          )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
+
   }
 }
-

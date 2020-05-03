@@ -21,11 +21,42 @@ class YourYear extends StatelessWidget {
 
 class DrawCircle extends CustomPainter {
   Paint _paint;
+  Paint _happyPaint;
+  Paint _sadPaint;
+  Paint _angryPaint;
+  Paint _stressPaint;
+  Paint _anxiousPaint;
+
   Color _color = Colors.black26;
 
   DrawCircle() {
     _paint = Paint()
       ..color = _color
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    _happyPaint = Paint()
+      ..color = Colors.amber
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    _sadPaint = Paint()
+      ..color = Colors.blue
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    _angryPaint = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    _stressPaint = Paint()
+      ..color = Colors.deepOrangeAccent
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    _anxiousPaint = Paint()
+      ..color = Colors.purple
       ..strokeWidth = 1.0
       ..style = PaintingStyle.fill;
   }
@@ -180,6 +211,7 @@ class DrawCircle extends CustomPainter {
       k += 15;
     }
 
+    // 30th day
     canvas.drawCircle(Offset(-165, 445), 6.0, _paint);
 //    canvas.drawCircle(Offset(-135, 445), 6.0, _paint); February
     canvas.drawCircle(Offset(-105, 445), 6.0, _paint);
@@ -193,6 +225,7 @@ class DrawCircle extends CustomPainter {
     canvas.drawCircle(Offset(135, 445), 6.0, _paint);
     canvas.drawCircle(Offset(165, 445), 6.0, _paint);
 
+    // 31st day
     canvas.drawCircle(Offset(-165, 460), 6.0, _paint);
 //    canvas.drawCircle(Offset(-135, 445), 6.0, _paint); February
     canvas.drawCircle(Offset(-105, 460), 6.0, _paint);
@@ -205,6 +238,14 @@ class DrawCircle extends CustomPainter {
     canvas.drawCircle(Offset(105, 460), 6.0, _paint);
 //    canvas.drawCircle(Offset(135, 460), 6.0, _paint);
     canvas.drawCircle(Offset(165, 460), 6.0, _paint);
+
+    // data (May)
+    canvas.drawCircle(Offset(-45, 10), 6.0, _happyPaint);
+    canvas.drawCircle(Offset(-45, 25), 6.0, _anxiousPaint);
+    canvas.drawCircle(Offset(-45, 40), 6.0, _stressPaint);
+    canvas.drawCircle(Offset(-45, 55), 6.0, _sadPaint);
+    canvas.drawCircle(Offset(-45, 70), 6.0, _happyPaint);
+
   }
 
   @override
